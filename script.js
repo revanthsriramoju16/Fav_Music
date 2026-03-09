@@ -1,4 +1,3 @@
-// Load saved songs from local storage when the page opens
 let songs = JSON.parse(localStorage.getItem('songs')) || [];
 
 function addSong() {
@@ -10,13 +9,10 @@ function addSong() {
     return;
   }
 
-  // Add song to list
   songs.push(songName);
 
-  // Save updated list to local storage
   localStorage.setItem('songs', JSON.stringify(songs));
 
-  // Clear input box and refresh song list
   songInput.value = "";
   displaySongs();
 }
@@ -29,7 +25,6 @@ function displaySongs() {
     const li = document.createElement('li');
     li.textContent = song;
 
-    // ❌ Add a remove button for each song
     const delBtn = document.createElement('button');
     delBtn.textContent = "❌";
     delBtn.style.marginLeft = "10px";
@@ -40,7 +35,6 @@ function displaySongs() {
   });
 }
 
-// 🗑️ Function to remove a song
 function removeSong(index) {
   songs.splice(index, 1);
   localStorage.setItem('songs', JSON.stringify(songs));
@@ -49,11 +43,10 @@ function removeSong(index) {
 function clearAllSongs() {
   if (confirm("Are you sure you want to delete all songs?")) {
     songs = [];
-    localStorage.removeItem('songs'); // clear from storage
-    displaySongs(); // refresh
+    localStorage.removeItem('songs'); 
+    displaySongs();
   }
 }
 
 
-// Display songs when page loads
 displaySongs();
